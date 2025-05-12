@@ -1,18 +1,20 @@
-use std::env;
-use std::process;
+use clap::Parser;
 
-use minigrep::Config;
+#[derive(Parser)]
+struct Options {
+    #[clap(default_value = "Meow!")]
+    /// What does the cat say?
+    message: String
+}
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let config = Config::build(env::args()).unwrap_or_else(|err| {
-            eprintln!("Problem parsing arguments: {err}");
-            process::exit(1);
-    });
-
-    if let Err(e) = minigrep::run(config) {
-        eprintln!("Application error: {e}");
-        process::exit(1);
-    }
+    let options = Options::parse();
+    let message = options.message;
+    
+    println!("{}", message);
+    println!(" \\");
+    println!("  \\");
+    println!("     /\\_/\\");
+    println!("    ( o o )");
+    println!("    =( I )=");
 }
